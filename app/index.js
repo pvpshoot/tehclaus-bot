@@ -1,6 +1,7 @@
+require("dotenv").config({ path: `${__dirname}/.env` });
 const TelegramBot = require('node-telegram-bot-api');
 
-const token = '';
+const token = ''
 
 const bot = new TelegramBot(token, { polling: true });
 
@@ -29,14 +30,13 @@ function shouldISendMessage(msg) {
     // return isFresh && (messageHasPhoto || msg.from.username === 'urbanlich');
 }
 
-bot.on('message', function(msg) {
+bot.on('message', function (msg) {
     const chatId = msg.chat.id;
-    console.dir(msg)
 
     if (shouldISendMessage(msg)) {
         const message = reactions[Math.floor(Math.random() * reactions.length)];
 
-        setTimeout(function() {
+        setTimeout(function () {
             bot.sendMessage(chatId, message);
         }, 2000);
     }
